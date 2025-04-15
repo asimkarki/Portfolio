@@ -26,19 +26,13 @@ class Yatzy:
             if self.dice.count(val) >= 2:
                 return val * 2
         return 0
-
-    def TwoPairs(self): #
-        values = sorted(self.get_values(), reverse=True)
-        pairs = []
-        counted = set()
-        for val in values:
-            if values.count(val) >= 2 and val not in counted:
-                pairs.append(val)
-                counted.add(val)
-            if len(pairs) == 2:
-                break
-        if len(pairs) == 2:
-            return sum(p * 2 for p in pairs)
+    
+    def TwoPairs(self):
+        values = self.get_values()
+        pairs = [val for val in set(values) if values.count(val) >= 2]
+        if len(pairs) >= 2:
+            top_two = sorted(pairs, reverse=True)[:2]
+            return sum(p * 2 for p in top_two)
         return 0
 
 
